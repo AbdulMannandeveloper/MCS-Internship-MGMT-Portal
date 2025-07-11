@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
+
+// Admin Components
+import EntityMaking from './Admin/Entity_Making';
+import AdminSidebar from './Admin/Sidebar';
+import ViewBatch from './Admin/View_Batch';
+import ViewCourseAdvisor from './Admin/View_Course_Advisors';
+import ViewDepartment from './Admin/View_Department';
+import ViewStudentsAdmin from './Admin/View_Students';
+
+// Course Advisor Components
+import CourseAdvisorMain from './Course Advisor/Main Screen';
+import CourseAdvisorSidebar from './Course Advisor/Sidebar';
+import ViewSingleStudent from './Course Advisor/View Single Student';
+import ViewStudentsAdvisor from './Course Advisor/View Students';
+
+// Login Screens
+import AdminLogin from './Login Screens/Admin Login';
+import StudentLogin from './Login Screens/Student';
+import TeacherLogin from './Login Screens/Teacher Login';
+
+// Student Components
+import InternshipForm from './Student/Internship Form';
+import StudentMain from './Student/Main Screen';
+import StudentSidebar from './Student/Sidebar';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <Routes>
+        {/* Admin */}
+        <Route path="/admin/entity" element={<EntityMaking />} />
+        <Route path="/admin/sidebar" element={<AdminSidebar />} />
+        <Route path="/admin/view-batch" element={<ViewBatch />} />
+        <Route path="/admin/view-course-advisor" element={<ViewCourseAdvisor />} />
+        <Route path="/admin/view-department" element={<ViewDepartment />} />
+        <Route path="/admin/view-students" element={<ViewStudentsAdmin />} />
+
+        {/* Course Advisor */}
+        <Route path="/advisor/main" element={<CourseAdvisorMain />} />
+        <Route path="/advisor/sidebar" element={<CourseAdvisorSidebar />} />
+        <Route path="/advisor/view-single-student" element={<ViewSingleStudent />} />
+        <Route path="/advisor/view-students" element={<ViewStudentsAdvisor />} />
+
+        {/* Login Screens */}
+        <Route path="/login/admin" element={<AdminLogin />} />
+        <Route path="/login/student" element={<StudentLogin />} />
+        <Route path="/login/teacher" element={<TeacherLogin />} />
+
+        {/* Student */}
+        <Route path="/student/form" element={<InternshipForm />} />
+        <Route path="/student/main" element={<StudentMain />} />
+        <Route path="/student/sidebar" element={<StudentSidebar />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
