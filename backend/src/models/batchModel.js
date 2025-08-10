@@ -1,0 +1,33 @@
+const db = require('../config/db');
+
+// Create new batch
+const createBatch = async (batchYear, batchName, deptId) => {
+  const result = await db.query(
+    `INSERT INTO batch (batch_year, batch_name, dept_id)
+     VALUES ($1, $2, $3) RETURNING *`,
+    [batchYear, batchName, deptId]
+  );
+  return result.rows[0];
+};
+
+// Get all batches with department names
+const getAllBatches = async () => {
+  const result = await db.query(
+    `SELECT b.batch_id, b.batch_year, b.batch_name, d.dept_name
+     FROM batch b
+     JOIN department d ON b.dept_id = d.dept_id
+     ORDER BY b.batch_year DESC, b.batch_name`
+  );
+  return result.rows;
+};
+
+// Delete batch by ID
+const deleteBatchById = async (batchId) => {
+  const result = await db.query(
+    'DELETE FROM batch WHERE batch_id = $1 RETURNING *',
+    [batchId]
+  );
+  return result.rows[0];
+};
+
+module.exports = { createBatch, getAllBatches, deleteBatchById };

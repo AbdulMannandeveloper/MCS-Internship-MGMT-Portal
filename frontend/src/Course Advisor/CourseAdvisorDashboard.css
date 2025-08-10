@@ -1,0 +1,107 @@
+.dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+.sidebar {
+  width: 260px;
+  background: #001f4d;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sidebar-logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.logo-img {
+  max-width: 100px;
+}
+.sidebar-header {
+  margin-bottom: 20px;
+}
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar-nav li {
+  padding: 10px 0;
+  font-weight: bold;
+}
+.sidebar-nav .active {
+  color: #f0c000;
+}
+.sidebar-footer {
+  margin-top: -30px;
+  padding-top: 30px;
+}
+.logout-btn {
+  width: 100%;
+  padding: 10px;
+  background: #f00;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.dashboard-content {
+  flex: 1;
+  padding: 20px;
+}
+.analytics-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.card {
+  background: #eee;
+  padding: 15px;
+  flex: 1;
+  border-radius: 8px;
+  text-align: center;
+}
+.filters-section input,
+.filters-section select {
+  margin-right: 10px;
+  padding: 8px;
+}
+.students-table,
+.internship-details-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.students-table th,
+.students-table td,
+.internship-details-table th,
+.internship-details-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+.status.completed {
+  color: green;
+  font-weight: bold;
+}
+.status.incomplete {
+  color: red;
+  font-weight: bold;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  max-height: 90vh;
+  overflow-y: auto;
+  width: 90%;
+}
