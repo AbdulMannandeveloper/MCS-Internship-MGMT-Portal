@@ -22,81 +22,71 @@ const ViewStudentsAdmin = () => {
   useEffect(() => {
     // In a real app, this would be an API call
     const mockStudents = [
+  {
+    id: 'S001',
+    login_id: 'stu001',
+    student_name: 'Ali Raza',
+    registration_number: 'FA20-BSE-001',
+    batch_id_fk: 'B2020',
+    email: 'ali.raza@example.com',
+    cgpa: 3.7,
+    internship: {
+      organization: 'Tech Solutions',
+      type: 'Summer Internship',
+      duration: '6 weeks',
+      status: 'Completed'
+    },
+    internshipRecords: [
       {
-        id: 'S001',
-        login_id: 'stu001',
-        student_name: 'Ali Raza',
-        registration_number: 'FA20-BSE-001',
-        batch_id_fk: 'B2020',
-        email: 'ali.raza@example.com',
-        cgpa: 3.7,
-        internship: {
-          organization: 'Tech Solutions',
-          type: 'Summer Internship',
-          duration: '6 weeks',
-          status: 'Completed'
-        },
-        cv: 'ali_raza_cv.pdf'
-      },
-      {
-        id: 'S002',
-        login_id: 'stu002',
-        student_name: 'Sara Khan',
-        registration_number: 'FA20-BSE-002',
-        batch_id_fk: 'B2020',
-        email: 'sara.khan@example.com',
-        cgpa: 3.9,
-        internship: {
-          organization: 'InnovateX',
-          type: 'Research Internship',
-          duration: '8 weeks',
-          status: 'Completed'
-        },
-        cv: 'sara_khan_cv.pdf'
-      },
-      {
-        id: 'S003',
-        login_id: 'stu003',
-        student_name: 'Ahmed Hassan',
-        registration_number: 'FA21-BEE-001',
-        batch_id_fk: 'B2021',
-        email: 'ahmed.hassan@example.com',
-        cgpa: 3.2,
-        internship: {
-          organization: 'PowerGrid Inc',
-          type: 'Industrial Training',
-          duration: '12 weeks',
-          status: 'In Progress'
-        },
-        cv: 'ahmed_hassan_cv.pdf'
-      },
-      {
-        id: 'S004',
-        login_id: 'stu004',
-        student_name: 'Fatima Abbas',
-        registration_number: 'FA22-BCS-001',
-        batch_id_fk: 'B2022',
-        email: 'fatima.abbas@example.com',
-        cgpa: 3.5,
-        internship: null
-      },
-      {
-        id: 'S005',
-        login_id: 'stu005',
-        student_name: 'Bilal Ahmed',
-        registration_number: 'FA23-BME-001',
-        batch_id_fk: 'B2023',
-        email: 'bilal.ahmed@example.com',
-        cgpa: 3.8,
-        internship: {
-          organization: 'MediTech',
-          type: 'Research Internship',
-          duration: '10 weeks',
-          status: 'Pending Approval'
-        },
-        cv: 'bilal_ahmed_cv.pdf'
+        durationWeeks: 6,
+        yearOfCompletion: 2023,
+        internshipType: 'Summer Internship',
+        organization: 'Tech Solutions',
+        reportingOfficer: 'John Smith',
+        contact: '03001234567',
+        email: 'john.smith@techsolutions.com',
+        website: 'https://techsolutions.com',
+        evidences: '/downloads/evidence1.pdf',
+        survey1: '/downloads/survey1.pdf',
+        survey2: '/downloads/survey2.pdf',
+        survey3: '/downloads/survey3.pdf'
       }
-    ];
+    ],
+    cv: 'ali_raza_cv.pdf'
+  },
+  {
+    id: 'S002',
+    login_id: 'stu002',
+    student_name: 'Sara Khan',
+    registration_number: 'FA20-BSE-002',
+    batch_id_fk: 'B2020',
+    email: 'sara.khan@example.com',
+    cgpa: 3.9,
+    internship: {
+      organization: 'InnovateX',
+      type: 'Research Internship',
+      duration: '8 weeks',
+      status: 'Completed'
+    },
+    internshipRecords: [
+      {
+        durationWeeks: 8,
+        yearOfCompletion: 2023,
+        internshipType: 'Research Internship',
+        organization: 'InnovateX',
+        reportingOfficer: 'Sarah Johnson',
+        contact: '03007654321',
+        email: 'sarah.j@innovatex.com',
+        website: 'https://innovatex.com',
+        evidences: '/downloads/evidence2.pdf',
+        survey1: '/downloads/survey4.pdf',
+        survey2: '/downloads/survey5.pdf',
+        survey3: '/downloads/survey6.pdf'
+      }
+    ],
+    cv: 'sara_khan_cv.pdf'
+  }
+];
     setStudents(mockStudents);
   }, []);
 
@@ -326,38 +316,66 @@ const ViewStudentsAdmin = () => {
                   </div>
                 </div>
                 
-                {selectedStudent.internship ? (
-                  <div className="detail-section">
-                    <h4 className="detail-heading">Internship Details</h4>
-                    <div className="internship-card">
-                      <div className="internship-header">
-                        <div className="internship-org">{selectedStudent.internship.organization}</div>
-                        <div className={`internship-status ${selectedStudent.internship.status.toLowerCase().replace(' ', '-')}`}>
-                          {selectedStudent.internship.status}
-                        </div>
-                      </div>
-                      
-                      <div className="internship-details">
-                        <div className="detail-row">
-                          <span className="detail-label">Type:</span>
-                          <span className="detail-value">{selectedStudent.internship.type}</span>
-                        </div>
-                        <div className="detail-row">
-                          <span className="detail-label">Duration:</span>
-                          <span className="detail-value">{selectedStudent.internship.duration}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="detail-section">
-                    <h4 className="detail-heading">Internship Status</h4>
-                    <div className="no-internship">
-                      <div className="warning-icon">⚠️</div>
-                      <p>This student has not started an internship yet.</p>
-                    </div>
-                  </div>
-                )}
+                {selectedStudent.internshipRecords && Array.isArray(selectedStudent.internshipRecords) ? (
+  selectedStudent.internshipRecords.length > 0 ? (
+    <div className="detail-section">
+      <h4 className="detail-heading">Internship Details</h4>
+      <table className="internship-details-table">
+        <thead>
+          <tr>
+            <th>Weeks</th>
+            <th>Year</th>
+            <th>Type</th>
+            <th>Organization</th>
+            <th>Reporting Officer</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Website</th>
+            <th>Evidence</th>
+            <th>Survey 1</th>
+            <th>Survey 2</th>
+            <th>Survey 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          {selectedStudent.internshipRecords.map((rec, i) => (
+            <tr key={i}>
+              <td>{rec.durationWeeks}</td>
+              <td>{rec.yearOfCompletion}</td>
+              <td>{rec.internshipType}</td>
+              <td>{rec.organization}</td>
+              <td>{rec.reportingOfficer}</td>
+              <td>{rec.contact}</td>
+              <td>{rec.email}</td>
+              <td><a href={rec.website} target="_blank" rel="noopener noreferrer">Link</a></td>
+              <td><a href={rec.evidences} download>Evidence</a></td>
+              <td><a href={rec.survey1} download>S1</a></td>
+              <td><a href={rec.survey2} download>S2</a></td>
+              <td><a href={rec.survey3} download>S3</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  ) : (
+    <div className="detail-section">
+      <h4 className="detail-heading">Internship Status</h4>
+      <div className="no-internship">
+        <div className="warning-icon">⚠️</div>
+        <p>This student has not started an internship yet.</p>
+      </div>
+    </div>
+  )
+) : (
+  <div className="detail-section">
+    <h4 className="detail-heading">Internship Status</h4>
+    <div className="no-internship">
+      <div className="warning-icon">⚠️</div>
+      <p>No internship data available for this student.</p>
+    </div>
+  </div>
+)}
+
                 
                 <div className="modal-actions">
                   <button 
