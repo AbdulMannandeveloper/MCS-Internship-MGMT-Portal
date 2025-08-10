@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import bcrypt from 'bcryptjs'; // ✅ Import bcrypt
 
 const AdminSignUp = () => {
   const [form, setForm] = useState({ username: '', password: '', confirmPassword: '' });
@@ -16,18 +17,23 @@ const AdminSignUp = () => {
       return;
     }
 
-    const res = await fetch('http://localhost:5000/api/admin/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: form.username, password: form.password })
-    });
+    try {
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(form.password, saltRounds);
 
-    const data = await res.json();
-    if (res.ok) {
-      alert("Admin registered successfully");
-      navigate('/admin-login'); // redirect
-    } else {
-      alert(data.message || "Sign up failed");
+      // Simulate API payload
+      const payload = {
+        username: form.username,
+        password: hashedPassword
+      };
+
+      console.log("📦 Data to send over API:", payload);
+
+      alert("Admin registered successfully (simulation)");
+      navigate('/login/admin');
+    } catch (err) {
+      console.error("Error hashing password:", err);
+      alert("An error occurred while processing your request.");
     }
   };
 

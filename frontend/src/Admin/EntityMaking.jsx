@@ -1,7 +1,11 @@
 // src/Admin/Entity_Making.jsx
 import React, { useState } from 'react';
 import AdminSidebar from './Sidebar';
+import bcrypt from 'bcryptjs'; // ✅ Add this at the top
 import './admin.css';
+
+
+
 
 const EntityMaking = () => {
   const [selectedEntity, setSelectedEntity] = useState('');
@@ -33,13 +37,27 @@ const EntityMaking = () => {
     });
   };
 
-  const handleAdd = () => {
-    console.log('Adding record:', { entity: selectedEntity, data: formData });
-    // Here you would typically make an API call to add the record
+  const handleAdd = async () => {
+  try {
+    let dataToSend = { ...formData };
+
+    // ✅ Hash only if password field exists
+    if (dataToSend.password) {
+      const saltRounds = 10;
+      dataToSend.password = await bcrypt.hash(dataToSend.password, saltRounds);
+    }
+
+    console.log('Adding record:', { entity: selectedEntity, data: dataToSend });
+    // TODO: API call to save dataToSend
     alert(`${selectedEntity} record added successfully!`);
+
     setFormData({});
     setSelectedEntity('');
-  };
+  } catch (error) {
+    console.error('Error hashing password:', error);
+  }
+};
+
 
   const renderForm = () => {
     switch (selectedEntity) {

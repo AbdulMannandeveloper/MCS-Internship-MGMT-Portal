@@ -1,7 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import mcsLogo from '../images/mcs-logo.png';
 
-const StudentSidebar = ({ onAddInternship, studentData, onLogout }) => {
+const StudentSidebar = ({ onAddInternship, studentData }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate('/login/student');
+  };
+
   return (
     <div style={{
       width: '250px',
@@ -52,9 +59,6 @@ const StudentSidebar = ({ onAddInternship, studentData, onLogout }) => {
               display: 'flex',
               alignItems: 'center',
               transition: 'background-color 0.3s',
-              ':hover': {
-                backgroundColor: '#34495e'
-              }
             }}
             onClick={onAddInternship}
           >
@@ -79,7 +83,7 @@ const StudentSidebar = ({ onAddInternship, studentData, onLogout }) => {
 
       {/* Logout */}
       <button 
-        onClick={onLogout}
+        onClick={handleLogout}
         style={{
           backgroundColor: '#e74c3c',
           color: 'white',
@@ -89,10 +93,6 @@ const StudentSidebar = ({ onAddInternship, studentData, onLogout }) => {
           margin: '0 20px 20px',
           cursor: 'pointer',
           fontSize: '14px',
-          transition: 'background-color 0.3s',
-          ':hover': {
-            backgroundColor: '#c0392b'
-          }
         }}
       >
         Logout
